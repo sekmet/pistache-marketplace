@@ -12,10 +12,9 @@ const Main = (props: IMainProps) => (
     {props.meta}
     <Navbar />
 
-    <div className="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
+    <div className="mx-auto w-full max-w-7xl grow lg:flex xl:px-8">
       {props.children}
     </div>
-
   </div>
 );
 

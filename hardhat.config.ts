@@ -20,7 +20,7 @@ task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
 });
 
 const config: HardhatUserConfig = {
-  solidity: '0.8.16',
+  solidity: '0.8.17',
   networks: {
     "base-goerli": {
       chainId: 84531,

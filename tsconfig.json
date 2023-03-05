@@ -39,6 +39,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/artifacts/*": ["./artifacts/*"],
+      "@/interface/*": ["./src/interfaces/*"],
       "@/typechain/*": ["./typechain-types/contracts/*"],
       "@/public/*": ["./public/*"]
     }
@@ -51,10 +52,5 @@
     "./scripts",
     "./test"
   ],
-  "include": [
-    "./typechain-types",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "include": ["./typechain-types", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

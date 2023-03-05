@@ -24,8 +24,8 @@ const About = () => (
         <span role="img" aria-label="rocket">
           🚀
         </span>{' '}
-        A simple Multi Signature Wallet for ETH, ERC20, ERC721 transactions
-        on Base Goerli Testnet.
+        A simple Multi Signature Wallet for ETH, ERC20, ERC721 transactions on
+        Base Goerli Testnet.
       </p>
       <p className="leading-text">
         A multi signature wallet contract that can be used with ERC20, ERC721

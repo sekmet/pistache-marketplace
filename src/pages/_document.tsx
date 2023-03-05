@@ -10,8 +10,14 @@ class MyDocument extends Document {
       <Html lang={AppConfig.locale} className="h-full">
         <Head />
         <body className="h-full bg-white dark:bg-navy-900">
-          <div className="fixed top-0 left-0 h-full w-1/2 bg-white" aria-hidden="true" />
-          <div className="fixed top-0 right-0 h-full w-1/2 bg-gray-50" aria-hidden="true" />
+          <div
+            className="fixed top-0 left-0 h-full w-1/2 bg-white"
+            aria-hidden="true"
+          />
+          <div
+            className="fixed top-0 right-0 h-full w-1/2 bg-gray-50"
+            aria-hidden="true"
+          />
           <Main />
           <NextScript />
         </body>

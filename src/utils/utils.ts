@@ -107,7 +107,7 @@ export const getCurrencyByChainId = (chainId: string) => {
       result = 'ETH';
       break;
     case '84531':
-      result = 'ETH';  
+      result = 'ETH';
       break;
 
     default:
@@ -301,7 +301,7 @@ export const getProviderByChainId = (chainId: string) => {
       break;
     case '84531':
       result = process.env.BASEGOERLI_NETWORK_PROVIDER;
-      break;      
+      break;
 
     default:
       result = 'Unsupported network';
@@ -507,7 +507,6 @@ export const getNetworkByChainId = (chainId: string) => {
         thumbnail: '/assets/images/base.jpg',
       };
       break;
-
 
     default:
       throw Error('Unsupported network');

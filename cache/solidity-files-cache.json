@@ -1,12 +1,12 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/MANTLE/TOOLS/mantle-multisig-wallet/contracts/MultiSigWallet.sol": {
-      "lastModificationDate": 1677443940045,
-      "contentHash": "1d12fd88372138fd7b282a38c755844c",
-      "sourceName": "contracts/MultiSigWallet.sol",
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/contracts/base/Market.sol": {
+      "lastModificationDate": 1678032141522,
+      "contentHash": "8d17980d34ca2eda62f2d527e17a3045",
+      "sourceName": "contracts/base/Market.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.17",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -29,23 +29,23 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
-        "@openzeppelin/contracts/token/ERC721/IERC721.sol"
+        "@openzeppelin/contracts/utils/Counters.sol",
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/security/ReentrancyGuard.sol"
       ],
       "versionPragmas": [
-        "^0.8.16"
+        "^0.8.17"
       ],
       "artifacts": [
-        "MultiSigWallet"
+        "NFTMarketBase"
       ]
     },
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/MANTLE/TOOLS/mantle-multisig-wallet/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1676589469807,
-      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
+      "lastModificationDate": 1678032403804,
+      "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
+      "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.17",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -72,15 +72,58 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "IERC20"
+        "Counters"
       ]
     },
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/MANTLE/TOOLS/mantle-multisig-wallet/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1676589469807,
-      "contentHash": "c22d4395e33763de693fd440c6fd10e1",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
+      "lastModificationDate": 1678032453493,
+      "contentHash": "f7f4f78c31f28534852e5c56000a25af",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC721.sol",
+        "./IERC721Receiver.sol",
+        "./extensions/IERC721Metadata.sol",
+        "../../utils/Address.sol",
+        "../../utils/Context.sol",
+        "../../utils/Strings.sol",
+        "../../utils/introspection/ERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC721"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+      "lastModificationDate": 1678032403804,
+      "contentHash": "a8e2d1c30042f64ed89c9d4157eb6cb9",
+      "sourceName": "@openzeppelin/contracts/security/ReentrancyGuard.sol",
+      "solcConfig": {
+        "version": "0.8.17",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -107,15 +150,15 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "IERC721Receiver"
+        "ReentrancyGuard"
       ]
     },
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/MANTLE/TOOLS/mantle-multisig-wallet/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1676589469807,
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+      "lastModificationDate": 1678032453493,
       "contentHash": "eb7e61db29f31d88b3c1cef1b063d338",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.17",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -147,12 +190,414 @@
         "IERC721"
       ]
     },
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/MANTLE/TOOLS/mantle-multisig-wallet/node_modules/hardhat/console.sol": {
-      "lastModificationDate": 1676588950989,
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+      "lastModificationDate": 1678032453493,
+      "contentHash": "c22d4395e33763de693fd440c6fd10e1",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721Receiver"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+      "lastModificationDate": 1678032486649,
+      "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721Metadata"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+      "lastModificationDate": 1678032453849,
+      "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC165"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1678032403824,
+      "contentHash": "396031251978f8febfd90cb62cb240ec",
+      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./math/Math.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Strings"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/utils/Address.sol": {
+      "lastModificationDate": 1678032403804,
+      "contentHash": "f31ad6fc4bbf9c06203987220156a6ba",
+      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.1"
+      ],
+      "artifacts": [
+        "Address"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1678032403804,
+      "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
+      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Context"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1678032453849,
+      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC165"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1678032453493,
+      "contentHash": "b9c58920ce74d6dc819161786112e7ee",
+      "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Math"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/contracts/polygon/Market.sol": {
+      "lastModificationDate": 1678032158666,
+      "contentHash": "39a865bbe1a902d523046321f8823fd7",
+      "sourceName": "contracts/polygon/Market.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/utils/Counters.sol",
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/security/ReentrancyGuard.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "NFTMarketPolygon"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+      "lastModificationDate": 1678032486621,
+      "contentHash": "8af32effd0536e2971ff8496812a5016",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC721URIStorage"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/contracts/polygon/NFT.sol": {
+      "lastModificationDate": 1678032153662,
+      "contentHash": "770d22aec6b43963000d667a784fb0b8",
+      "sourceName": "contracts/polygon/NFT.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/utils/Counters.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "NFTPolygon"
+      ]
+    },
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/node_modules/hardhat/console.sol": {
+      "lastModificationDate": 1678032373503,
       "contentHash": "4ff3cd2f6272c9a6516e9ee4f2b967d3",
       "sourceName": "hardhat/console.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.17",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -182,47 +627,12 @@
         "console"
       ]
     },
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/MANTLE/TOOLS/mantle-multisig-wallet/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1676589469807,
-      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
-      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/contracts/ethereum/NFT.sol": {
+      "lastModificationDate": 1678032150038,
+      "contentHash": "12357772229b3479148535ec55626742",
+      "sourceName": "contracts/ethereum/NFT.sol",
       "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC165"
-      ]
-    },
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/BASE/base-multisig-wallet/contracts/MultiSigWallet.sol": {
-      "lastModificationDate": 1677745213794,
-      "contentHash": "1d12fd88372138fd7b282a38c755844c",
-      "sourceName": "contracts/MultiSigWallet.sol",
-      "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.17",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -245,58 +655,24 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
-        "@openzeppelin/contracts/token/ERC721/IERC721.sol"
+        "@openzeppelin/contracts/utils/Counters.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "hardhat/console.sol"
       ],
       "versionPragmas": [
-        "^0.8.16"
+        "^0.8.17"
       ],
       "artifacts": [
-        "MultiSigWallet"
+        "NFT"
       ]
     },
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/BASE/base-multisig-wallet/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1677746674984,
-      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/contracts/base/NFT.sol": {
+      "lastModificationDate": 1678032144098,
+      "contentHash": "979c94777c3fb3fb2c33c601b9f1961f",
+      "sourceName": "contracts/base/NFT.sol",
       "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC20"
-      ]
-    },
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/BASE/base-multisig-wallet/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1677746674984,
-      "contentHash": "eb7e61db29f31d88b3c1cef1b063d338",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
-      "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.17",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -319,21 +695,24 @@
         }
       },
       "imports": [
-        "../../utils/introspection/IERC165.sol"
+        "@openzeppelin/contracts/utils/Counters.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "hardhat/console.sol"
       ],
       "versionPragmas": [
-        "^0.8.0"
+        "^0.8.17"
       ],
       "artifacts": [
-        "IERC721"
+        "NFTBase"
       ]
     },
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/BASE/base-multisig-wallet/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1677746674984,
-      "contentHash": "c22d4395e33763de693fd440c6fd10e1",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+    "/home/sekmet/DEVELOPMENT/HACKATHONS/ETHDENVER2023/GELATO/RELEASES/base-pistache-marketlpace/contracts/ethereum/Market.sol": {
+      "lastModificationDate": 1678032147258,
+      "contentHash": "8d53ee4879917b0dc4908fffda6c8cd1",
+      "sourceName": "contracts/ethereum/Market.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.17",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -355,47 +734,16 @@
           }
         }
       },
-      "imports": [],
+      "imports": [
+        "@openzeppelin/contracts/utils/Counters.sol",
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/security/ReentrancyGuard.sol"
+      ],
       "versionPragmas": [
-        "^0.8.0"
+        "^0.8.17"
       ],
       "artifacts": [
-        "IERC721Receiver"
-      ]
-    },
-    "/home/sekmet/DEVELOPMENT/HACKATHONS/BASE/base-multisig-wallet/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1677746674988,
-      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
-      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC165"
+        "NFTMarket"
       ]
     }
   }

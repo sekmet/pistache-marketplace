@@ -1,36 +1,38 @@
-import React, {useEffect, useState } from 'react';
-import Editor from 'react-simple-code-editor';
-import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
-import 'prismjs/themes/prism.css'; //Example style, you can use another
+import 'prismjs/themes/prism.css'; // Example style, you can use another
 
-type Sourcecode = {
-    sourcecode: string;
-  };
+import Prism from 'prismjs';
+import { highlight } from 'prismjs/components/prism-core';
+import React, { useEffect, useState } from 'react';
+import Editor from 'react-simple-code-editor';
 
-function CodeEditor(sourcecode?: string) {
-  const [code, setCode] = useState<string>('');
+import type { PistacheWeb3function } from '@/interfaces';
+
+function CodeEditor({ sourcecode }: PistacheWeb3function) {
+  const [code, setCode] = useState();
 
   useEffect(() => {
     if (sourcecode) {
-        setCode(sourcecode)
+      setCode(sourcecode);
     }
-    console.log(code)
-  },[sourcecode])
+    console.log(sourcecode);
+  }, [sourcecode]);
 
   return (
     <Editor
-      value={`${code.sourcecode}`}
-      onValueChange={code => setCode(code)}
-      highlight={code => highlight(code, languages.js)}
+      value={`${code}`}
+      onValueChange={(scode) => setCode(scode)}
+      highlight={(hcode) =>
+        highlight(hcode, Prism.languages.javascript, 'javascript')
+      }
       padding={10}
       style={{
         fontFamily: '"Fira code", "Fira Mono", monospace',
-        fontSize: 16
+        fontSize: 16,
       }}
     />
   );
 }
 
-export { CodeEditor }
+export { CodeEditor };
