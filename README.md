@@ -1,26 +1,25 @@
-# A simple Multi Signature Wallet for BitDAO, ERC20, ERC721 transactions on Mantle Testnet [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20%40XCodeCarlos)](https://twitter.com/XCodeCarlos)
+# Pistache Marketplace [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20%40XCodeCarlos)](https://twitter.com/XCodeCarlos)
 
 <p align="center">
-  <a href="#"><img src="public/assets/images/logo.png?raw=true" width="50%" alt="Multi Signature Wallets for BitDAO"></a>
+  <a href="#"><img src="public/assets/images/logo.png?raw=true" width="50%" alt="Pistache Marketplace"></a>
 </p>
 
-🚀 A multi signature wallet contract that can be used with ERC20, ERC721 and BitDAO transactions and a frontend built using NextJS.
+🚀 Streamline your decentralized applications with Pistache's web3 functions marketplace.
 
- ⚡ Create, import and use multi signature wallets for BitDAO, ERC20 and ERC721 transactions on Mantle Testnet.
+ ⚡ Web3 Functions are decentralized cloud functions that work similarly to AWS Lambda or Google Cloud, just for web3. They enable developers to execute on-chain transactions based on arbitrary off-chain data (APIs / subgraphs, etc) & computation.
+
+Pistache marketplace allows for rich interactions. Web3 functions can be inspected through metadata and optionally code, their implementation downloaded if permitted, they can be tested in attached isolated execution environments (through temporary deployments), and finally they can be deployed in associated platforms.
+
+## UPDATES IN PROGRESS
 
 ### Features
 
-- ⚡ Allow create multisig wallets with multiple admins
-- 💎 Allow deposit and send BitDAO(BIT) token
-- 🪙 Allow deposit and send ERC20 tokens
-- 🖼️ Allow deposit and send ERC721(NFT) tokens
-- 🔥 Frontend using [Next.js](https://nextjs.org) v13.x
+- Coming soon
 
-**This project is experimental, use at your own risk.**
 
 ### Requirements
 
-- Node.js 16+/npm, yarn and metamask
+- Node.js 18+/npm, yarn and metamask
 
 ### Getting started
 
@@ -30,13 +29,7 @@
 yarn install
 ```
 
-2. Compile the solidity code to get the artifacts
-
-```bash
-> yarn hardhat compile
-```
-
-Then, you can run locally in development mode with live reload:
+2.  Then, you can run locally in development mode with live reload:
 
 ```shell
 yarn run dev
