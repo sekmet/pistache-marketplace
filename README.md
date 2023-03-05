@@ -1,7 +1,7 @@
 # Pistache Marketplace [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20%40XCodeCarlos)](https://twitter.com/XCodeCarlos)
 
 <p align="center">
-  <a href="#"><img src="public/assets/images/logo.png?raw=true" width="50%" alt="Pistache Marketplace"></a>
+  <a href="#"><img src="public/assets/images/logo.png?raw=true" width="25%" alt="Pistache Marketplace"></a>
 </p>
 
 🚀 Streamline your decentralized applications with Pistache's web3 functions marketplace.
