@@ -21,11 +21,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm ci
+      - run: yarn ci
 
       - run: npx npm-check-updates -u # Update dependencies
       - run: rm -Rf node_modules package-lock.json
-      - run: npm install
+      - run: yarn install
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:

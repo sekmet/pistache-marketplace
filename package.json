@@ -1,7 +1,7 @@
 {
   "name": "pistache-web3functions-hub",
   "description": "Streamline your decentralized applications with Pistache's web3 functions marketplace.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
