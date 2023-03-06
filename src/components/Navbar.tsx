@@ -2,47 +2,64 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { Fragment, useEffect, useState } from 'react';
+import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 
-import Identicon from '@/components/Identicon';
-import { classNames } from '@/utils/utils';
+import ConnectButton from '@/components/Wallet/ConnectButton';
+import Identicon from '@/components/Wallet/Identicon';
+import ModalConnectors from '@/components/Wallet/ModalConnectors';
+import {
+  classNames,
+  ellipsisAddress,
+  getNetworkNameByChainId,
+} from '@/utils/utils';
 
 const Navbar: FC = () => {
   // const dispatch = useDispatch();
-  // const router = useRouter();
+  const router = useRouter();
   const [isMetamask, setIsMetamask] = useState(false);
+  const { address, connector } = useAccount();
+  const { disconnect } = useDisconnect();
+  const { chain } = useNetwork();
+  const [chainId, setChainid] = useState<any>();
+  const [account, setAccount] = useState<string>();
+  const [openModalConnectors, setOpenModalConnectors] =
+    useState<boolean>(false);
 
-  /* const getNavigation = (href: string) => {
+  const getNavigation = (href: string) => {
     // let className = children.props.className || ''
     if (router.pathname === href) {
       // className = `${className} text-blue-500`
       return true;
     }
     return false;
-  }; */
+  };
 
   const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Marketplace', href: '#', current: false },
+    { name: 'Dashboard', href: '/', current: getNavigation('/') },
+    // { name: 'Info', href: '/info', current: getNavigation('/info') },
+    {
+      name: 'Marketplace',
+      href: '/marketplace',
+      current: getNavigation('/marketplace'),
+    },
   ];
 
   // const navigation = isMetamask ? navigationUser : navigationGuest;
 
-  // const chainId = '84531';
-  // const account = '0x6545646464656545';
-
-  /* const user = {
+  const user = {
     name: ellipsisAddress(String(account)),
     email: 'ipfs@blockchain.eth',
     imageUrl: '/favicon-32x32.png',
-  }; */
+  };
 
-  /* const handleSignOut = () => {
+  const handleSignOut = () => {
     console.log('Sign Out');
-    // router.push('/login')
-  }; */
+    localStorage.removeItem('wagmi.store');
+    disconnect();
+  };
 
   const userNavigation = [
     {
@@ -54,11 +71,22 @@ const Navbar: FC = () => {
   ];
 
   useEffect(() => {
+    console.log('openModalConnectors', openModalConnectors);
+    console.log(connector);
+  }, [openModalConnectors]);
+
+  useEffect(() => {
+    setAccount(address);
+    setChainid(chain?.id);
+  }, [address, openModalConnectors]);
+
+  useEffect(() => {
     const metamask = (window as any).ethereum;
     if (metamask) setIsMetamask(true);
+    console.log('chainId', chainId, window.ethereum.networkVersion);
   }, [isMetamask]);
 
-  // const onOpen = () => console.log('onOpen disclosure');
+  const onOpen = () => console.log('onOpen disclosure');
   return (
     <>
       {/* Navbar */}
@@ -82,7 +110,7 @@ const Navbar: FC = () => {
 
                 {/* Search section */}
                 <div className="flex flex-1 justify-center lg:justify-end">
-                  <div className="w-full px-2 lg:px-6">
+                  <div className="w-full px-2 lg:px-1">
                     <label htmlFor="search" className="sr-only">
                       Search functions
                     </label>
@@ -96,7 +124,7 @@ const Navbar: FC = () => {
                       <input
                         id="search"
                         name="search"
-                        className="bg-opacity-25 block w-full rounded-md border border-transparent bg-indigo-400 py-2 pl-10 pr-3 leading-5 text-indigo-100 placeholder:text-indigo-200 focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-0 focus:placeholder:text-gray-400 sm:text-sm"
+                        className="bg-opacity-25 block w-full rounded-md border border-transparent bg-indigo-400 py-2 pl-10 pr-3 leading-5 text-indigo-100 placeholder:text-indigo-200 focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-0 focus:placeholder:text-gray-400 sm:text-sm lg:w-80"
                         placeholder="Search functions"
                         type="search"
                       />
@@ -132,10 +160,21 @@ const Navbar: FC = () => {
                         </a>
                       ))}
                     </div>
+
+                    {chainId && (
+                      <div className="flex items-center justify-center whitespace-nowrap rounded-xl bg-indigo-700 p-1 text-indigo-200">
+                        <div className="py-1 px-3">
+                          <span className="text-sm font-bold text-gray-300">
+                            {getNetworkNameByChainId(chainId)}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-4 shrink-0">
                       <div>
-                        <Menu.Button className="flex rounded-full bg-indigo-700 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700">
+                        {/* <Menu.Button className="flex rounded-full bg-indigo-700 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700">
                           <span className="sr-only">Open user menu</span>
                           <span className="h-8 w-8 rounded-full">
                             <Identicon
@@ -145,7 +184,12 @@ const Navbar: FC = () => {
                               iconSize={32}
                             />
                           </span>
-                        </Menu.Button>
+                            </Menu.Button> */}
+                        <ConnectButton
+                          handleOpenModalConnectors={setOpenModalConnectors}
+                          handleOpenModal={onOpen}
+                          DrawerMenu={Menu.Button}
+                        />
                       </div>
                       <Transition
                         as={Fragment}
@@ -172,6 +216,20 @@ const Navbar: FC = () => {
                               )}
                             </Menu.Item>
                           ))}
+                          <Menu.Item key="Disconnect">
+                            {({ active }) => (
+                              <a
+                                id="Disconnect"
+                                onClick={() => handleSignOut()}
+                                className={classNames(
+                                  active ? 'bg-gray-100' : '',
+                                  'block px-4 py-2 text-sm text-gray-700'
+                                )}
+                              >
+                                Disconnect
+                              </a>
+                            )}
+                          </Menu.Item>
                         </Menu.Items>
                       </Transition>
                     </Menu>
@@ -199,7 +257,24 @@ const Navbar: FC = () => {
                   </Disclosure.Button>
                 ))}
               </div>
+
               <div className="border-t border-indigo-800 pt-4 pb-3">
+                <div className="flex items-center px-5">
+                  <div className="shrink-0">
+                    <span className="h-10 w-10 rounded-full">
+                      <Identicon iconSize={36} />
+                    </span>
+                  </div>
+                  <div className="ml-3">
+                    <div className="text-base font-medium leading-none text-white">
+                      {user.name}
+                    </div>
+                    {/* <div className="text-sm font-medium leading-none text-gray-400">
+                    {user.email}
+                  </div> */}
+                  </div>
+                </div>
+
                 <div className="space-y-1 px-2">
                   {userNavigation.map((item) => (
                     <Disclosure.Button
@@ -217,6 +292,10 @@ const Navbar: FC = () => {
           </>
         )}
       </Disclosure>
+      <ModalConnectors
+        open={openModalConnectors}
+        setOpen={setOpenModalConnectors}
+      />
     </>
   );
 };

@@ -17,7 +17,7 @@ const About = () => (
         alt="Multisig Wallets"
       />
     </div>
-    <div className="prose prose-slate dark:prose-invert max-w-none">
+    <div className="prose prose-slate max-w-none dark:prose-invert">
       <h1 className="text-2xl font-bold">Multisig Wallets for ETH</h1>
 
       <p className="leading-text font-bold">

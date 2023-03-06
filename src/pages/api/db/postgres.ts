@@ -5,9 +5,9 @@ const { Pool } = require('pg');
 dotenv.config();
 
 export const dbconnection = new Pool({
-  host: '192.168.68.104',
-  port: 5432,
-  username: 'pistache',
-  password: 'pistacheapi2023',
-  database: 'pistachedb',
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  username: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
 });

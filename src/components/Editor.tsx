@@ -1,5 +1,3 @@
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism.css'; // Example style, you can use another
 
 import Prism from 'prismjs';
@@ -9,24 +7,25 @@ import Editor from 'react-simple-code-editor';
 
 import type { PistacheWeb3function } from '@/interfaces';
 
-function CodeEditor({ sourcecode }: PistacheWeb3function) {
-  const [code, setCode] = useState();
+function CodeEditor(props: PistacheWeb3function) {
+  const [code, setCode] = useState<string>();
 
   useEffect(() => {
-    if (sourcecode) {
-      setCode(sourcecode);
+    if (props.sourcecode) {
+      setCode(props.sourcecode);
+      props?.setW3fSourcecode(props.sourcecode);
     }
-    console.log(sourcecode);
-  }, [sourcecode]);
+  }, []);
 
   return (
     <Editor
+      name={props?.name}
       value={`${code}`}
       onValueChange={(scode) => setCode(scode)}
       highlight={(hcode) =>
         highlight(hcode, Prism.languages.javascript, 'javascript')
       }
-      padding={10}
+      padding={9}
       style={{
         fontFamily: '"Fira code", "Fira Mono", monospace',
         fontSize: 16,

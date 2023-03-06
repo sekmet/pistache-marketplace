@@ -107,6 +107,14 @@ module.exports = {
     /* eslint-disable global-require */
     /* eslint-disable import/no-extraneous-dependencies */
     require('@tailwindcss/line-clamp'),
+    /* eslint-disable global-require */
+    /* eslint-disable import/no-extraneous-dependencies */
+    require('@tailwindcss/aspect-ratio'),
+    /* eslint-disable global-require */
+    /* eslint-disable import/no-extraneous-dependencies */
     require('@tailwindcss/forms'),
+    /* eslint-disable global-require */
+    /* eslint-disable import/no-extraneous-dependencies */
+    require('@tailwindcss/typography'),
   ],
 };

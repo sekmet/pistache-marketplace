@@ -8,7 +8,7 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => (
-  <div className="relative flex min-h-full flex-col">
+  <div className="relative flex min-h-screen flex-col">
     {props.meta}
     <Navbar />
 

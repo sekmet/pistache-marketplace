@@ -4,9 +4,6 @@ import {
   UserCircleIcon,
   UserGroupIcon,
 } from '@heroicons/react/24/outline';
-import { Formik } from 'formik';
-import { encode } from 'js-base64';
-import ky from 'ky';
 import React, { useEffect, useState } from 'react';
 
 import { CodeEditor } from '@/components/Editor';
@@ -19,39 +16,37 @@ const navigation = [
   { name: 'Web3 Function', href: '#', icon: UserCircleIcon, current: true },
   { name: 'Schema JSON', href: '#', icon: KeyIcon, current: false },
   /* { name: 'Plan & Billing', href: '#', icon: CreditCardIcon, current: false },
-  { name: 'Team', href: '#', icon: UserGroupIcon, current: false }, */
+    { name: 'Team', href: '#', icon: UserGroupIcon, current: false }, */
   { name: 'Secrets', href: '#', icon: UserGroupIcon, current: false },
   { name: 'Integrations', href: '#', icon: SquaresPlusIcon, current: false },
 ];
 
 const functionMockup: PistacheWeb3function = {
   sourcecode: `import {
-    Web3Function,
-    Web3FunctionContext,
-  } from "@gelatonetwork/web3-functions-sdk";
-  import { Contract } from "ethers";
-  import ky from "ky"; // we recommend using ky as axios doesn't support fetch by default
-
-  Web3Function.onRun(async (context: Web3FunctionContext) => {
-    const { userArgs, gelatoArgs, provider } = context;
-
-    // #### Write or paste you function code here
-    //...
-
-    // Return execution call data
-    return {
-      canExec: true,
-      callData: <...>,
-    };
-  });
-`,
+      Web3Function,
+      Web3FunctionContext,
+    } from "@gelatonetwork/web3-functions-sdk";
+    import { Contract } from "ethers";
+    import ky from "ky"; // we recommend using ky as axios doesn't support fetch by default
+  
+    Web3Function.onRun(async (context: Web3FunctionContext) => {
+      const { userArgs, gelatoArgs, provider } = context;
+  
+      // #### Write or paste you function code here
+      //...
+  
+      // Return execution call data
+      return {
+        canExec: true,
+        callData: <...>,
+      };
+    });
+  `,
 };
 
 const fmockup = functionMockup.sourcecode;
 
-const url = 'http://localhost:3000/api/new-function';
-
-export default function New3function() {
+export default function W3function() {
   const [W3fSourcecode, setW3fSourcecode] = useState();
 
   useEffect(() => {}, [W3fSourcecode]);
@@ -97,160 +92,46 @@ export default function New3function() {
           </aside>
 
           <div className="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
-            <Formik
-              initialValues={{
-                name: '',
-                description: '',
-                w3fsourcecode: '',
-              }}
-              validate={({ w3fsourcecode, name, description }) => {
-                const errors = {} as any;
-                if (!name) {
-                  errors.name = 'Required';
-                }
-                if (!description) {
-                  errors.description = 'Required';
-                }
-                if (!w3fsourcecode) {
-                  errors.w3fsourcecode = 'Required';
-                }
+            <form action="#" method="POST">
+              <div className="shadow sm:overflow-hidden sm:rounded-md">
+                <div className="space-y-6 bg-white py-6 px-4 sm:p-6">
+                  <div>
+                    <h3 className="text-lg font-medium leading-6 text-gray-900">
+                      Web3 Function
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-500">
+                      This information will be displayed publicly so be careful
+                      what you share.
+                    </p>
+                  </div>
 
-                /* admins.split(';').forEach((address) => {
-                if (!ethers.utils.isAddress(address)) {
-                  errors.admins = `Address (${address})ist not valid`;
-                }
-              }); */
-
-                return errors;
-              }}
-              onSubmit={async (
-                { w3fsourcecode, name, description },
-                { setSubmitting, resetForm }
-              ) => {
-                // w3fsourcecode = encode(W3fSourcecode);
-                /* const adminsList = admins.split(';');
-
-              const address = await createNewWallet(adminsList, +required);
-              setMessage(
-                address
-                  ? `Contract deployed to ${address}`
-                  : 'Something went wrong'
-              ); */
-                console.log(
-                  name,
-                  description,
-                  w3fsourcecode,
-                  encode(W3fSourcecode)
-                );
-
-                const formData = {
-                  name,
-                  description,
-                  sourcecode: encode(W3fSourcecode),
-                };
-
-                const response = await ky.post(url, {
-                  body: JSON.stringify(formData),
-                });
-                console.log(response);
-
-                setSubmitting(false);
-                resetForm();
-              }}
-            >
-              {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                isValid,
-              }) => (
-                <form onSubmit={handleSubmit} method="POST">
-                  <div className="shadow sm:overflow-hidden sm:rounded-md">
-                    <div className="space-y-6 bg-white py-6 px-4 sm:p-6">
+                  <div className="grid grid-cols-3 gap-6">
+                    <div className="col-span-3">
                       <div>
-                        <h3 className="text-lg font-medium leading-6 text-gray-900">
-                          Web3 Function
-                        </h3>
-                        <p className="mt-1 text-sm text-gray-500">
-                          This information will be displayed publicly so be
-                          careful what you share.
-                        </p>
+                        <CodeEditor
+                          name="w3fsourcecode"
+                          sourcecode={fmockup}
+                          setW3fSourcecode={setW3fSourcecode}
+                        />
+                        {/**/}
                       </div>
-
-                      <div className="grid grid-cols-3 gap-6">
-                        <div className="col-span-6">
-                          <label
-                            htmlFor="name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Name
-                          </label>
-                          <input
-                            type="text"
-                            name="name"
-                            id="web3FunctionName"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.name}
-                            placeholder="<Your web3 function name>"
-                            className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                          />
-                          {errors.name && touched.name && errors.name}
-                        </div>
-
-                        <div className="col-span-6">
-                          <label
-                            htmlFor="description"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Description
-                          </label>
-                          <textarea
-                            id="web3FunctionDescription"
-                            name="description"
-                            rows={3}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.description}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="<Your web3 function description>"
-                          />
-                          {errors.description &&
-                            touched.description &&
-                            errors.description}
-                        </div>
-
-                        <div className="col-span-3">
-                          <div>
-                            <CodeEditor
-                              name="w3fsourcecode"
-                              sourcecode={fmockup}
-                              setW3fSourcecode={setW3fSourcecode}
-                            />
-                            {/**/}
-                          </div>
-                          <p className="mt-2 text-sm text-gray-500">
-                            Web3 function typescript code
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                      <button
-                        type="submit"
-                        disabled={!isValid}
-                        className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                      >
-                        Save Code
-                      </button>
+                      <p className="mt-2 text-sm text-gray-500">
+                        Web3 function typescript code
+                      </p>
                     </div>
                   </div>
-                </form>
-              )}
-            </Formik>
+                </div>
+                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                  <button
+                    type="submit"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  >
+                    Save Code
+                  </button>
+                </div>
+              </div>
+            </form>
+
             <form action="#" method="POST">
               <div className="shadow sm:overflow-hidden sm:rounded-md">
                 <div className="space-y-6 bg-white py-6 px-4 sm:p-6">
@@ -341,8 +222,8 @@ export default function New3function() {
                         rows={6}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder={`"currency": "string",
-"oracle": "string"
-`}
+  "oracle": "string"
+  `}
                         defaultValue={''}
                       />
                     </div>

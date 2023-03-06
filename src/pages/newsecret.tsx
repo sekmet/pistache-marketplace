@@ -1,61 +1,31 @@
-import {
-  KeyIcon,
-  SquaresPlusIcon,
-  UserCircleIcon,
-  UserGroupIcon,
-} from '@heroicons/react/24/outline';
+import { UserCircleIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 import { Formik } from 'formik';
-import { encode } from 'js-base64';
 import ky from 'ky';
-import React, { useEffect, useState } from 'react';
+import type { GetStaticProps } from 'next';
+import Link from 'next/link';
+import React from 'react';
 
-import { CodeEditor } from '@/components/Editor';
 import type { PistacheWeb3function } from '@/interfaces';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 import { classNames } from '@/utils/utils';
 
+type Props = {
+  items: PistacheWeb3function[];
+};
+
 const navigation = [
-  { name: 'Web3 Function', href: '#', icon: UserCircleIcon, current: true },
-  { name: 'Schema JSON', href: '#', icon: KeyIcon, current: false },
+  { name: 'New Secret', href: '#', icon: UserCircleIcon, current: true },
+  // { name: 'Schema JSON', href: '#', icon: KeyIcon, current: false },
   /* { name: 'Plan & Billing', href: '#', icon: CreditCardIcon, current: false },
   { name: 'Team', href: '#', icon: UserGroupIcon, current: false }, */
   { name: 'Secrets', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Integrations', href: '#', icon: SquaresPlusIcon, current: false },
+  // { name: 'Integrations', href: '#', icon: SquaresPlusIcon, current: false },
 ];
 
-const functionMockup: PistacheWeb3function = {
-  sourcecode: `import {
-    Web3Function,
-    Web3FunctionContext,
-  } from "@gelatonetwork/web3-functions-sdk";
-  import { Contract } from "ethers";
-  import ky from "ky"; // we recommend using ky as axios doesn't support fetch by default
+const url = 'http://localhost:3000/api/new-secret';
 
-  Web3Function.onRun(async (context: Web3FunctionContext) => {
-    const { userArgs, gelatoArgs, provider } = context;
-
-    // #### Write or paste you function code here
-    //...
-
-    // Return execution call data
-    return {
-      canExec: true,
-      callData: <...>,
-    };
-  });
-`,
-};
-
-const fmockup = functionMockup.sourcecode;
-
-const url = 'http://localhost:3000/api/new-function';
-
-export default function New3function() {
-  const [W3fSourcecode, setW3fSourcecode] = useState();
-
-  useEffect(() => {}, [W3fSourcecode]);
-
+export default function New3Secret({ items }: Props) {
   return (
     <Main
       meta={
@@ -101,9 +71,8 @@ export default function New3function() {
               initialValues={{
                 name: '',
                 description: '',
-                w3fsourcecode: '',
               }}
-              validate={({ w3fsourcecode, name, description }) => {
+              validate={({ name, description }) => {
                 const errors = {} as any;
                 if (!name) {
                   errors.name = 'Required';
@@ -111,9 +80,9 @@ export default function New3function() {
                 if (!description) {
                   errors.description = 'Required';
                 }
-                if (!w3fsourcecode) {
-                  errors.w3fsourcecode = 'Required';
-                }
+                /* if (!w3fsourcecode) {
+                errors.w3fsourcecode = 'Required';
+              } */
 
                 /* admins.split(';').forEach((address) => {
                 if (!ethers.utils.isAddress(address)) {
@@ -124,10 +93,9 @@ export default function New3function() {
                 return errors;
               }}
               onSubmit={async (
-                { w3fsourcecode, name, description },
+                { name, description },
                 { setSubmitting, resetForm }
               ) => {
-                // w3fsourcecode = encode(W3fSourcecode);
                 /* const adminsList = admins.split(';');
 
               const address = await createNewWallet(adminsList, +required);
@@ -136,17 +104,11 @@ export default function New3function() {
                   ? `Contract deployed to ${address}`
                   : 'Something went wrong'
               ); */
-                console.log(
-                  name,
-                  description,
-                  w3fsourcecode,
-                  encode(W3fSourcecode)
-                );
+                console.log(name, description);
 
                 const formData = {
                   name,
                   description,
-                  sourcecode: encode(W3fSourcecode),
                 };
 
                 const response = await ky.post(url, {
@@ -172,7 +134,7 @@ export default function New3function() {
                     <div className="space-y-6 bg-white py-6 px-4 sm:p-6">
                       <div>
                         <h3 className="text-lg font-medium leading-6 text-gray-900">
-                          Web3 Function
+                          New Secret
                         </h3>
                         <p className="mt-1 text-sm text-gray-500">
                           This information will be displayed publicly so be
@@ -222,20 +184,6 @@ export default function New3function() {
                             touched.description &&
                             errors.description}
                         </div>
-
-                        <div className="col-span-3">
-                          <div>
-                            <CodeEditor
-                              name="w3fsourcecode"
-                              sourcecode={fmockup}
-                              setW3fSourcecode={setW3fSourcecode}
-                            />
-                            {/**/}
-                          </div>
-                          <p className="mt-2 text-sm text-gray-500">
-                            Web3 function typescript code
-                          </p>
-                        </div>
                       </div>
                     </div>
                     <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
@@ -244,123 +192,107 @@ export default function New3function() {
                         disabled={!isValid}
                         className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
-                        Save Code
+                        Save Secret
                       </button>
                     </div>
                   </div>
                 </form>
               )}
             </Formik>
-            <form action="#" method="POST">
-              <div className="shadow sm:overflow-hidden sm:rounded-md">
-                <div className="space-y-6 bg-white py-6 px-4 sm:p-6">
-                  <div>
-                    <h3 className="text-lg font-medium leading-6 text-gray-900">
-                      Schema JSON Information
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500">
-                      Define you schema json for your web3 function
-                    </p>
-                  </div>
 
-                  <div className="grid grid-cols-6 gap-6">
-                    <div className="col-span-6">
-                      <label
-                        htmlFor="web3FunctionVersion"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Web3 Function Version
-                      </label>
-                      <input
-                        type="text"
-                        name="web3FunctionVersion"
-                        id="web3FunctionVersion"
-                        placeholder="1.0.0"
-                        className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
-
-                    <div className="col-span-6">
-                      <label
-                        htmlFor="runtime"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Runtime
-                      </label>
-                      <input
-                        type="text"
-                        name="runtime"
-                        id="runtime"
-                        placeholder="1.0"
-                        className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
-
-                    <div className="col-span-6">
-                      <label
-                        htmlFor="memory"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Memory
-                      </label>
-                      <input
-                        type="text"
-                        name="memory"
-                        id="memory"
-                        placeholder="128"
-                        className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
-
-                    <div className="col-span-6">
-                      <label
-                        htmlFor="timeout"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Timeout
-                      </label>
-                      <input
-                        type="text"
-                        name="timeout"
-                        id="timeout"
-                        placeholder="30"
-                        className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
-
-                    <div className="col-span-6">
-                      <label
-                        htmlFor="userArgs"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        User Arguments
-                      </label>
-                      <textarea
-                        id="userArgs"
-                        name="userArgs"
-                        rows={6}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder={`"currency": "string",
-"oracle": "string"
-`}
-                        defaultValue={''}
-                      />
-                    </div>
-                  </div>
+            <div className="shadow sm:overflow-hidden sm:rounded-md">
+              <div className="space-y-6 bg-white py-6 px-4 sm:p-6">
+                <div>
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Secrets
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    This information will be displayed publicly so be careful
+                    what you share.
+                  </p>
                 </div>
-                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                  <button
-                    type="submit"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    Save Schema
-                  </button>
-                </div>
+
+                <ul
+                  role="list"
+                  className="divide-y divide-gray-200 rounded-md border border-gray-200 shadow"
+                >
+                  {items.map((project) => (
+                    <li
+                      key={project.repo}
+                      className="relative py-5 pl-4 pr-6 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6"
+                    >
+                      <div className="flex items-center justify-between space-x-4">
+                        {/* Repo name and link */}
+                        <div className="min-w-0 space-y-3">
+                          <div className="flex items-center space-x-3">
+                            <span
+                              className={classNames(
+                                project.active ? 'bg-green-100' : 'bg-gray-100',
+                                'h-4 w-4 rounded-full flex items-center justify-center'
+                              )}
+                              aria-hidden="true"
+                            >
+                              <span
+                                className={classNames(
+                                  project.active
+                                    ? 'bg-green-400'
+                                    : 'bg-gray-400',
+                                  'h-2 w-2 rounded-full'
+                                )}
+                              />
+                            </span>
+
+                            <h2 className="text-sm font-medium">
+                              <Link href={`/function/${project.id}`}>
+                                <span
+                                  className="absolute inset-0"
+                                  aria-hidden="true"
+                                />
+                                {project.name}{' '}
+                                <span className="sr-only">
+                                  {project.active ? 'Running' : 'Not running'}
+                                </span>
+                              </Link>
+                            </h2>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
     </Main>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  // Example for including static props in a Next.js function component page.
+  // Don't forget to include the respective types for any props passed into
+  // the component.
+
+  // You can use any data fetching library
+  const res = await fetch('http://localhost:3000/api/functions');
+  const cFunctions = await res.json();
+  const functions = cFunctions.map((func) => {
+    return {
+      id: func.id,
+      name: func.name,
+      href: '#',
+      siteHref: '#',
+      repoHref: '#',
+      repo: `gelato/${func.id}`,
+      tech: 'Web3 function',
+      location: 'United states',
+      starred: false,
+      active: true,
+    };
+  });
+
+  // console.log(functions);
+  const items = functions;
+  return { props: { items } };
+};

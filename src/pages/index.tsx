@@ -7,16 +7,21 @@ import {
   RectangleStackIcon,
   StarIcon,
 } from '@heroicons/react/20/solid';
+import dayjs from 'dayjs';
 import type { GetStaticProps } from 'next';
 import Link from 'next/link';
 // import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Identicon from '@/components/Identicon';
+import type { PistacheWeb3function } from '@/interfaces';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
-import { projects } from '@/utils/sample-data';
 import { classNames } from '@/utils/utils';
+
+const relativeTime = require('dayjs/plugin/relativeTime');
+
+dayjs.extend(relativeTime);
 
 /* const activityItems = [
   {
@@ -28,7 +33,11 @@ import { classNames } from '@/utils/utils';
   // More items...
 ]; */
 
-const Index = ({ items }: any) => {
+type Props = {
+  items: PistacheWeb3function[];
+};
+
+const Index = ({ items }: Props) => {
   // const router = useRouter();
   const [isMetamask, setIsMetamask] = useState(false);
 
@@ -110,12 +119,14 @@ const Index = ({ items }: any) => {
                         New Function
                       </button>
                     </Link>
-                    <button
-                      type="button"
-                      className="mt-3 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 xl:ml-0 xl:mt-3 xl:w-full"
-                    >
-                      New Secret
-                    </button>
+                    <Link href="/newsecret">
+                      <button
+                        type="button"
+                        className="mt-3 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 xl:ml-0 xl:mt-3 xl:w-full"
+                      >
+                        New Secret
+                      </button>
+                    </Link>
                   </div>
                 </div>
                 {/* Meta info */}
@@ -242,7 +253,7 @@ const Index = ({ items }: any) => {
                       </span>
 
                       <h2 className="text-sm font-medium">
-                        <a href={project.href}>
+                        <Link href={`/function/${project.id}`}>
                           <span
                             className="absolute inset-0"
                             aria-hidden="true"
@@ -251,11 +262,11 @@ const Index = ({ items }: any) => {
                           <span className="sr-only">
                             {project.active ? 'Running' : 'Not running'}
                           </span>
-                        </a>
+                        </Link>
                       </h2>
                     </div>
-                    <a
-                      href={project.repoHref}
+                    <Link
+                      href={`/function/${project.id}`}
                       className="group relative flex items-center space-x-2.5"
                     >
                       <svg
@@ -275,7 +286,7 @@ const Index = ({ items }: any) => {
                       <span className="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900">
                         {project.repo}
                       </span>
-                    </a>
+                    </Link>
                   </div>
                   <div className="sm:hidden">
                     <ChevronRightIcon
@@ -373,7 +384,28 @@ export const getStaticProps: GetStaticProps = async () => {
   // Example for including static props in a Next.js function component page.
   // Don't forget to include the respective types for any props passed into
   // the component.
-  const items = projects;
+
+  // You can use any data fetching library
+  const res = await fetch('http://localhost:3000/api/functions');
+  const cFunctions = await res.json();
+  const functions = cFunctions.map((func) => {
+    return {
+      id: func.id,
+      name: func.name,
+      href: '#',
+      siteHref: '#',
+      repoHref: '#',
+      repo: `gelato/${func.id}`,
+      tech: 'Web3 function',
+      lastDeploy: dayjs(func.createdat).fromNow(),
+      location: 'United states',
+      starred: false,
+      active: true,
+    };
+  });
+
+  // console.log(functions);
+  const items = functions;
   return { props: { items } };
 };
 
